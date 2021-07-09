@@ -20,15 +20,8 @@ set smartcase
 set colorcolumn=80
 set backspace=indent,eol,start
 set encoding=utf-8
-
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
-
-"map q <Nop>
-"vnoremap <P> "*p
+let mapleader=" "
+:set mouse=a
 
 call plug#begin('~/.vim/plugged')
 
@@ -37,19 +30,26 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-let NERDTreeQuitOnOpen = 1
+let NERDTreeQuitOnOpen = 0
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Code completion
 Plug 'ycm-core/YouCompleteMe'
 "Plug 'vim-scripts/AutoComplPop'
 set completeopt=menuone,longest
 set shortmess+=c
-set pumheight=2
+set pumheight=4
 let g:ycm_min_num_of_chars_for_completion=8
+let g:ycm_auto_hover=''
+nmap <leader>D <plug>(YCMHover)
+" Need to use esc not plain ctrl-c to trigger InsertLeave otherwise
+" signature help stays open.
+imap <C-c> <Esc>
+" Stop signature help unless toggled back on
+let g:ycm_disable_signature_help = 1
+nmap <leader>D <plug>(YCMHover)
 
 " Fuzzy finding
 nmap <C-P> :FZF<CR>
