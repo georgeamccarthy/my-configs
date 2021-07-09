@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
+plugins+=(zsh-vi-mode)
 export ZSH="/Users/georgeamccarthy/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -119,9 +120,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# Simple dollar prompt
-#export PS1="$ "
-
 alias matlab="/Applications/MATLAB_R2021a.app/bin/matlab -nodesktop -nosplash"
 
 # JINA_CLI_BEGIN
@@ -153,6 +151,9 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # JINA_CLI_END
 
+
+
+
 # Configuring two homebrew installs
 arch_name="$(uname -m)"
 if [ "${arch_name}" = "x86_64" ]; then
@@ -163,3 +164,38 @@ fi
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Setting fd as the default source for fzf
+#export FZF_DEFAULT_COMMAND='fd --type f'
+# Follow symbolic links and don't want it to exclude hidden files:
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# Now fzf (w/o pipe) will use fd instead of find
+
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# And to ** completion
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# Make the preview window syntax coloured and look nice.
+export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,1 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+export BAT_THEME="Dracula"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Cam WSDB Login
+export PGDATABASE=wsdb
+export PGUSER=george_mccarthy_summer2021
+export PGHOST=cappc127.ast.cam.ac.uk
+
+# TODO delete unused plugin
+# https://github.com/Tarrasch/zsh-autoenv
+# source ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh
+
+alias ca="conda activate"
