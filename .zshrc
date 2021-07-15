@@ -154,6 +154,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 
 
+
 # Configuring two homebrew installs
 arch_name="$(uname -m)"
 if [ "${arch_name}" = "x86_64" ]; then
@@ -199,3 +200,6 @@ export PGHOST=cappc127.ast.cam.ac.uk
 # source ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh
 
 alias ca="conda activate"
+
+# Launch ipython for vvv_exoplanets project
+alias vvv="ipython -i app.py"

@@ -25,23 +25,13 @@ let mapleader=" "
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'preservim/nerdtree'
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-let NERDTreeQuitOnOpen = 0
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
 " Code completion
 Plug 'ycm-core/YouCompleteMe'
 "Plug 'vim-scripts/AutoComplPop'
 set completeopt=menuone,longest
 set shortmess+=c
 set pumheight=4
-let g:ycm_min_num_of_chars_for_completion=8
+let g:ycm_min_num_of_chars_for_completion=4
 let g:ycm_auto_hover=''
 nmap <leader>D <plug>(YCMHover)
 " Need to use esc not plain ctrl-c to trigger InsertLeave otherwise
